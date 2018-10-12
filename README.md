@@ -28,3 +28,14 @@
 ## 3、Socket 通信 TCP 四次挥手
 
 ## 4、InetAddress 类
+
+&emsp;&emsp;在 Java 应用中 JVM 也会缓存 DNS 的解析结果，这个缓存是在 InetAddress 类中完成的，而且这个缓存时间还比较特殊，它有
+  两种缓存策略：一种是正确解析结果缓存，另一种是失败的解析结果缓存。这两个缓存时间由两个配置项控制，配置项是在
+  %JAVA_HOME%\lib\security\java.security 文件中配置的。两个配置项分别是：networkaddress.cache.ttl 和
+  networkaddress.cache.negative.ttl，它们的默认值分别是 -1（永不失效）和 10（缓存 10 秒）。
+
+&emsp;&emsp;可以直接修改 java.security 文件中的默认值、在 Java 的启动参数中增加 -Dsun.net.inetaddr.ttl=xxx 来修改默认值、通过
+  InetAddress 类动态修改。
+
+&emsp;&emsp;这里要特别强调一下，如果需要用 InetAddress 类解析域名，必须是单例模式，不然会有严重的性能问题，如果每次都创建
+  InetAddress 实例，则每次都要进行一次完整的域名解析，非常耗时。
