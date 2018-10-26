@@ -46,3 +46,6 @@
 &emsp;&emsp;可以直接修改`java.security`文件中的默认值在 Java 的启动参数中增加`-Dsun.net.inetaddr.ttl=xxx`来修改默认值、通过`InetAddress`类动态修改。
 
 &emsp;&emsp;这里要特别强调一下，如果需要用 InetAddress 类解析域名，必须是单例模式，不然会有严重的性能问题，如果每次都创建 InetAddress 实例，则每次都要进行一次完整的域名解析，非常耗时。
+
+## 5、参考
+
